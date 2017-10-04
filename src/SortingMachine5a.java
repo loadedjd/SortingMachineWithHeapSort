@@ -422,7 +422,8 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
     public final void changeToExtractionMode() {
         assert this.isInInsertionMode() : "Violation of: this.insertion_mode";
 
-        // TODO - fill in body
+        this.insertionMode = false;
+        this.heap = buildHeap(this.entries, this.machineOrder);
 
         assert this.conventionHolds();
     }
@@ -437,7 +438,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
 
         assert this.conventionHolds();
         // Fix this line to return the result after checking the convention.
-        return null;
+        return this.heap.entry(0);
     }
 
     @Override
