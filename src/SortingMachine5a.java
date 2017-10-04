@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import components.array.Array;
+import components.array.Array1L;
 import components.queue.Queue;
+import components.queue.Queue1L;
 import components.sortingmachine.SortingMachine;
 import components.sortingmachine.SortingMachineSecondary;
 
@@ -335,8 +337,11 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
      */
     private void createNewRep(Comparator<T> order) {
 
-        // TODO - fill in body
-
+    		this.insertionMode = true;
+        this.machineOrder = order;
+        this.entries = new Queue1L<>();
+        this.heapSize = 0;
+        this.heap = new Array1L<T>(this.heapSize);
     }
 
     /*
