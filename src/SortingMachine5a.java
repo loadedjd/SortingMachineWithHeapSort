@@ -413,7 +413,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         assert x != null : "Violation of: x is not null";
         assert this.isInInsertionMode() : "Violation of: this.insertion_mode";
 
-        // TODO - fill in body
+        this.entries.enqueue(x);
 
         assert this.conventionHolds();
     }
