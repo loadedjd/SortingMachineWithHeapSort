@@ -337,7 +337,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
      */
     private void createNewRep(Comparator<T> order) {
 
-    		this.insertionMode = true;
+    	this.insertionMode = true;
         this.machineOrder = order;
         this.entries = new Queue1L<>();
         this.heapSize = 0;
