@@ -454,12 +454,10 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
 
     @Override
     public final int size() {
-
-        // TODO - fill in body
+    		
 
         assert this.conventionHolds();
-        // Fix this line to return the result after checking the convention.
-        return 0;
+        return this.heapSize;
     }
 
     @Override
