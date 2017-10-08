@@ -152,6 +152,33 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
 
         // TODO - fill in body
         // *** you must use the recursive algorithm discussed in class ***
+        
+        int left = 2 * top + 1;
+        int right = 2 * top + 2;
+
+        if (left <= last) {
+            if (right <= last) {
+                if (order.compare(array.entry(left), array.entry(right)) > 0) {
+                    if (order.compare(array.entry(top),
+                            array.entry(right)) > 0) {
+                        array.exchangeEntries(top, right);
+                        siftDown(array, right, last, order);
+                    }
+                } else {
+                    if (order.compare(array.entry(top),
+                            array.entry(left)) > 0) {
+                        array.exchangeEntries(top, left);
+                        siftDown(array, left, last, order);
+                    }
+                }
+            } else {
+                if (order.compare(array.entry(top), array.entry(left)) > 0) {
+                    array.exchangeEntries(top, left);
+                    siftDown(array, left, last, order);
+                }
+
+            }
+        }
 
     }
 
@@ -195,9 +222,26 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
          * representation for a complete binary tree.
          */
 
-        // TODO - fill in body
-        // *** you must use the recursive algorithm discussed in class ***
+        int left = 2 * top + 1;
+        int right = 2 * top + 2;
+        int last = 0;
 
+        for (int i = 0; i < array.length(); i++) {
+            if (array.mayBeExamined(i)) {
+                last = i;
+            }
+        }
+
+        if (array.mayBeExamined(left)) {
+            if (array.mayBeExamined(right)) {
+                heapify(array, left, order);
+                heapify(array, right, order);
+            } else {
+                heapify(array, left, order);
+            }
+
+            siftDown(array, top, last, order);
+        }
     }
 
     /**
@@ -220,16 +264,22 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
      * </pre>
      */
     private static <T> Array<T> buildHeap(Queue<T> q, Comparator<T> order) {
-        assert q != null : "Violation of: q is not null";
-        assert order != null : "Violation of: order is not null";
-        /*
-         * Impractical to check the requires clause.
-         */
+    	
+    	 	 assert q != null : "Violation of: q is not null";
+         assert order != null : "Violation of: order is not null";
 
-        // TODO - fill in body
+         Array<T> heap = new Array1L<T>(q.length());
+         int index = 0;
+         
+         
+         while(q.length() > 0) {
+        	 	heap.setEntry(index, q.dequeue());
+        	 	index++;
+         }
+         
+         heapify(heap, 0, order);
 
-        // This line added just to make the component compilable.
-        return null;
+         return heap;
     }
 
     /**
@@ -424,6 +474,7 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
 
         this.insertionMode = false;
         this.heap = buildHeap(this.entries, this.machineOrder);
+        this.heapSize = this.heap.length();
 
         assert this.conventionHolds();
     }
