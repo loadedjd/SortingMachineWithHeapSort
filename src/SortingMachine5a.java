@@ -488,8 +488,13 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
         // TODO - fill in body
 
         assert this.conventionHolds();
-        // Fix this line to return the result after checking the convention.
-        return this.heap.entry(0);
+        
+        
+        
+        T front = this.heap.entry(0);
+        
+        
+        return front;
     }
 
     @Override

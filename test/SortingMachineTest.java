@@ -139,5 +139,52 @@ public abstract class SortingMachineTest {
 
     // TODO - add test cases for add, changeToExtractionMode, removeFirst,
     // isInInsertionMode, order, and size
+    
+    @Test
+    public final void testAddNonEmpty() {
+        SortingMachine<String> m = this.createFromArgsTest(ORDER, true, "Red", "Green");
+        SortingMachine<String> mExpected = this.createFromArgsRef(ORDER, true,
+                "Red", "Green", "Blue");
+        m.add("Blue");
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testChangeToExtractionModeNonEmpty() {
+        SortingMachine<String> m = this.createFromArgsTest(ORDER, true, "Red", "Green", "Blue");
+        SortingMachine<String> mExpected = this.createFromArgsRef(ORDER, true,
+                "Red", "Green", "Blue");
+        
+        m.changeToExtractionMode();
+        mExpected.changeToExtractionMode();
+        
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testChangeToExtractionModeEmpty() {
+        SortingMachine<String> m = this.createFromArgsTest(ORDER, true);
+        SortingMachine<String> mExpected = this.createFromArgsRef(ORDER, true);
+        
+        m.changeToExtractionMode();
+        mExpected.changeToExtractionMode();
+        
+        assertEquals(mExpected, m);
+    }
+    
+    @Test
+    public final void testRemoveFirstNonEmpty() {
+        SortingMachine<String> m = this.createFromArgsTest(ORDER, true, "Red", "Green", "Blue");
+        SortingMachine<String> mExpected = this.createFromArgsRef(ORDER, true, "Red", "Green", "Blue");
+        
+        m.changeToExtractionMode();
+        mExpected.changeToExtractionMode();
+        
+        String first = m.removeFirst();
+        String expectedFirst = mExpected.removeFirst();
+        
+        assertEquals(expectedFirst, first);
+        assertEquals(mExpected, m);
+    }
 
 }
