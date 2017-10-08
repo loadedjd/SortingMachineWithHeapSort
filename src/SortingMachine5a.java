@@ -485,14 +485,17 @@ public class SortingMachine5a<T> extends SortingMachineSecondary<T> {
                 .isInInsertionMode() : "Violation of: not this.insertion_mode";
         assert this.size() > 0 : "Violation of: this.contents /= {}";
 
-        // TODO - fill in body
+        T front = this.heap.entry(0);
+        this.heap.exchangeEntries(0, this.heapSize - 1);
+        this.heapSize--;
+        siftDown(this.heap, 0, this.heapSize - 1, this.machineOrder);
+        
 
         assert this.conventionHolds();
         
         
         
-        T front = this.heap.entry(0);
-        
+       
         
         return front;
     }
